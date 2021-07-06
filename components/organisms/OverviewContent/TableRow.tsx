@@ -3,7 +3,7 @@ import cx from 'classnames';
 interface TableRowProps {
     title: string;
     categori: string;
-    item: number;
+    item: string;
     price: number;
     status: 'Pending' | 'Success' | 'Failed';
     image: string;
@@ -23,7 +23,7 @@ export default function TableRow(props: TableRowProps) {
       <th scope="row">
         <img
           className="float-start me-3 mb-lg-0 mb-3"
-          src={`/img/${image}.png`}
+          src={image}
           width={80}
           height={60}
           alt="game thumb"
@@ -38,8 +38,6 @@ export default function TableRow(props: TableRowProps) {
       <td>
         <p className="fw-medium color-palette-1 m-0">
           {item}
-          {' '}
-          Gold
         </p>
       </td>
       <td>
