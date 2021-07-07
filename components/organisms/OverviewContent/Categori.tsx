@@ -28,7 +28,6 @@ export default function Categori(props: CategoriProps) {
               thousandSeparator="."
               decimalSeparator=","
             />
-
           </p>
         </div>
       </div>
