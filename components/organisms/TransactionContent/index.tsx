@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format';
 import TableRow from './TableRow';
 import ButtonTab from './ButtonTab';
 import { getMemberTransactions } from '../../../services/member';
+import { HistoryTransactionTypes } from '../../../services/data-types';
 
 export default function TransactionContent() {
   const [total, setTotal] = useState(0);
@@ -72,7 +73,7 @@ export default function TransactionContent() {
                 </tr>
               </thead>
               <tbody id="list_status_item">
-                {transactions.map((transaction) => (
+                {transactions.map((transaction: HistoryTransactionTypes) => (
                   <TableRow
                     key={transaction._id}
                     image={`${IMG}/${transaction.historyVoucherTopup.thumbnail}`}
@@ -81,6 +82,7 @@ export default function TransactionContent() {
                     item={`${transaction.historyVoucherTopup.coinQuantity} ${transaction.historyVoucherTopup.coinName}`}
                     price={transaction.value}
                     status={transaction.status}
+                    id={transaction._id}
                   />
                 ))}
               </tbody>
