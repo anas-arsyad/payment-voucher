@@ -1,11 +1,9 @@
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import Footer from '../../components/organisms/Footer';
+import Navbar from '../../components/organisms/Navbar';
 import TopUpForm from '../../components/organisms/TopUpForm';
 import TopUpItem from '../../components/organisms/TopUpItem';
-import Navbar from '../../components/organisms/Navbar';
-import Footer from '../../components/organisms/Footer';
-import { getDetailVoucher, getFeaturedGame } from '../../services/player';
 import { GameItemTypes, NominalsTypes, PaymentTypes } from '../../services/data-types';
+import { getDetailVoucher, getFeaturedGame } from '../../services/player';
 
 interface DetailProps {
   dataItem: GameItemTypes;
@@ -46,7 +44,6 @@ export async function getStaticPaths() {
       id: item._id,
     },
   }));
-  console.log('paths: ', paths);
   return {
     paths,
     fallback: false,
@@ -62,7 +59,6 @@ interface GetStaticProps {
 export async function getStaticProps({ params }: GetStaticProps) {
   const { id } = params;
   const data = await getDetailVoucher(id);
-  console.log('data: ', data);
   return {
     props: {
       dataItem: data.detail,

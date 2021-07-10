@@ -8,14 +8,21 @@ import Input from '../../components/atoms/Input';
 import { JWTPayloadTypes, UserTypes } from '../../services/data-types';
 import { updateProfile } from '../../services/member';
 
+interface UserStateTypes {
+  id: string;
+  name: string;
+  email: string;
+  avatar: any;
+}
+
 export default function EditProfile() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<UserStateTypes>({
     id: '',
     name: '',
     email: '',
     avatar: '',
   });
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState('/');
   const router = useRouter();
 
   useEffect(() => {
@@ -29,7 +36,6 @@ export default function EditProfile() {
   }, []);
 
   const onSubmit = async () => {
-    console.log('data: ', user);
     const data = new FormData();
 
     data.append('image', user.avatar);
@@ -38,7 +44,6 @@ export default function EditProfile() {
     if (response.error) {
       toast.error(response.message);
     } else {
-      console.log('data: ', response);
       Cookies.remove('token');
       router.push('/sign-in');
     }
@@ -54,10 +59,10 @@ export default function EditProfile() {
               <div className="photo d-flex">
                 <div className="image-upload">
                   <label htmlFor="avatar">
-                    {imagePreview ? (
-                      <img src={imagePreview} alt="icon upload" width={90} height={90} style={{ borderRadius: '100%' }} />
-                    ) : (
+                    {imagePreview === '/' ? (
                       <img src={user.avatar} alt="icon upload" width={90} height={90} style={{ borderRadius: '100%' }} />
+                    ) : (
+                      <img src={imagePreview} alt="icon upload" width={90} height={90} style={{ borderRadius: '100%' }} />
                     )}
                   </label>
                   <input
@@ -66,7 +71,7 @@ export default function EditProfile() {
                     name="avatar"
                     accept="image/png, image/jpeg"
                     onChange={(event) => {
-                      const img = event.target.files[0];
+                      const img = event.target.files![0];
                       setImagePreview(URL.createObjectURL(img));
                       return setUser({
                         ...user,
