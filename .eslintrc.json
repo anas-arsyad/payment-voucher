@@ -29,7 +29,9 @@
         "jsx-a11y/anchor-is-valid": "off",
         "react/jsx-props-no-spreading": "off",
         "no-underscore-dangle": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
         "jsx-a11y/label-has-associated-control": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
         "import/extensions": ["error", "ignorePackages", {
             "js": "never",
             "jsx": "never",
